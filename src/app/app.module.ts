@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { HomeComponent } from './home/home.component';
 import { CoursesComponent } from './courses/courses.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -15,14 +16,11 @@ import { CoursesComponent } from './courses/courses.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
   ],
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    CoursesComponent
-  ],
+  declarations: [AppComponent, HomeComponent, CoursesComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
