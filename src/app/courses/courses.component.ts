@@ -4,7 +4,7 @@ import { CoursesService } from '../shared/services/courses.service';
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss']
+  styleUrls: ['./courses.component.scss'],
 })
 export class CoursesComponent implements OnInit {
   // CHALLENGE
@@ -15,11 +15,11 @@ export class CoursesComponent implements OnInit {
 
   courses = null;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private coursesService: CoursesService) {}
 
   ngOnInit(): void {
     this.resetSelectedCourse();
-    this.courses = this.coursesService.all();
+    this.loadCourses();
   }
 
   resetSelectedCourse() {
@@ -28,7 +28,7 @@ export class CoursesComponent implements OnInit {
       title: '',
       description: '',
       percentComplete: 0,
-      favorite: false
+      favorite: false,
     };
 
     this.selectedCourse = emptyCourse;
@@ -38,16 +38,31 @@ export class CoursesComponent implements OnInit {
     this.selectedCourse = course;
   }
 
+  loadCourses() {
+    this.coursesService.all().subscribe((courses) => (this.courses = courses));
+  }
+
+  refreshCourses() {
+    this.resetSelectedCourse();
+    this.loadCourses();
+  }
+
   saveCourse(course) {
-    if(course.id) {
-      this.coursesService.update(course);
+    if (course.id) {
+      this.coursesService
+        .update(course)
+        .subscribe((result) => this.refreshCourses());
     } else {
-      this.coursesService.create(course);
+      this.coursesService
+        .create(course)
+        .subscribe((result) => this.refreshCourses());
     }
   }
 
   deleteCourse(courseId) {
-    this.coursesService.delete(courseId);
+    this.coursesService
+      .delete(courseId)
+      .subscribe((result) => this.refreshCourses());
   }
 
   cancel() {

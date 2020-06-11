@@ -6,6 +6,20 @@
       "description": "Learn the fundamentals of Angular 9",
       "percentComplete": 26,
       "favorite": true
+    },
+    {
+      "id": 2,
+      "title": "Functional JavaScript",
+      "description": "test",
+      "percentComplete": 9,
+      "favorite": false
+    },
+    {
+      "id": 3,
+      "title": "test",
+      "description": "test",
+      "percentComplete": 16,
+      "favorite": false
     }
   ]
 }
